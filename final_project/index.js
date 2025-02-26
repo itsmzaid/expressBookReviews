@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const session = require("express-session");
 const customer_routes = require("./router/auth_users.js").authenticated;
 const genl_routes = require("./router/general.js").general;
+const books = require("./router/booksdb.js");
 
 const app = express();
 
@@ -37,5 +38,10 @@ const PORT = 5000;
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
+
+// Added /books route
+app.get("/books", (req, res) => {
+  res.status(200).json(books);
+});
 
 app.listen(PORT, () => console.log("Server is running"));

@@ -27,8 +27,10 @@ regd_users.post("/login", (req, res) => {
   if (!authenticatedUser(username, password)) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
-
-  let accessToken = jwt.sign({ username }, "secret_key", { expiresIn: "1h" });
+  // auth_users.js
+  let accessToken = jwt.sign({ username }, "fingerprint_customer", {
+    expiresIn: "1h",
+  });
 
   return res
     .status(200)
